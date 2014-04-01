@@ -1,0 +1,61 @@
+apply plugin: 'c'
+
+binaries.all {
+    if (toolChain in Gcc || toolChain in Clang) {
+        cCompiler.define "NDEBUG"
+        cCompiler.define "_REENTRANT"
+        cCompiler.define "LUA_USE_LINUX"
+        cCompiler.args "-O2", "-fno-strict-aliasing"
+        linker.args "-s"
+        tasks.withType(LinkSharedLibrary) {
+            tasks.withType(CCompile) {
+                includes.from("eris/src")
+                includes.from("/usr/lib/jvm/java-6-openjdk/include")
+                includes.from("/usr/lib/jvm/java-6-openjdk/include/linux")
+            }
+        }
+    }
+    if (toolChain in VisualCpp) {
+        cCompiler.args "/O2", "/MT"
+        tasks.withType(LinkSharedLibrary) {
+            tasks.withType(CCompile) {
+                includes.from("eris/src")
+                includes.from("C:/Program Files (x86)/Java/jdk1.6.0_27/include")
+                includes.from("C:/Program Files (x86)/Java/jdk1.6.0_27/include/win32")
+            }
+            if (targetPlatform == platforms.x86)
+                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/kernel32.lib")
+            if (targetPlatform == platforms.x64)
+                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/x64/kernel32.lib")
+        }
+    }
+    tasks.withType(CCompile) {
+        positionIndependentCode = true
+    }
+}
+
+sources {
+    natives {
+        c {
+            source {
+                srcDir "eris/src"
+                srcDir "jnlua/jnlua/src/main/c"
+                include "*.c"
+                exclude "luac.c", "lua.c"
+                exclude "javavm.c"
+            }
+        }
+    }
+}
+
+libraries {
+    natives { targetPlatforms "x86", "x64" }
+}
+
+model {
+    buildTypes { release }
+    platforms {
+        x86 { architecture "x86" }
+        x64 { architecture "x86_64" }
+    }
+}
