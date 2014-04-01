@@ -2,7 +2,7 @@ This is a repository containing the C sources used to build the native library t
 
 Note that to compile the 64 bit version on Windows you'll probably need Visual Studio 2011. At least for me 2010 doesn't come with a 64 bit compiler.
 
-To build the libraries, adjust the paths as necessary (in particular to your JDK), then run `gradlew gradlew x86NativesSharedLibrary x64NativesSharedLibrary`.
+To build the libraries, adjust the paths as necessary (in particular to your JDK), then run `gradlew x86NativesSharedLibrary x64NativesSharedLibrary`.
 
 
 [OpenComputers]: https://github.com/MightyPirates/OpenComputers
