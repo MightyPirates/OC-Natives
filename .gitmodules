@@ -1,7 +1,7 @@
 [submodule "jnlua"]
 	path = jnlua
-	url = git@github.com:fnuecke/jnlua.git
+	url = https://github.com/fnuecke/jnlua.git
 	branch = eris
 [submodule "eris"]
 	path = eris
-	url = git@github.com:fnuecke/eris.git
+	url = https://github.com/fnuecke/eris.git
