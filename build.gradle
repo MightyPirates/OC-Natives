@@ -16,17 +16,23 @@ binaries.all {
         }
     }
     if (toolChain in VisualCpp) {
-        cCompiler.args "/O2", "/MT"
+        if (false) {
+            cCompiler.args "/Od", "/Zi", "/MTd"
+            linker.args "/debug"
+        }
+        else {
+            cCompiler.args "/O2", "/MT"
+        }
         tasks.withType(LinkSharedLibrary) {
             tasks.withType(CCompile) {
                 includes.from("eris/src")
-                includes.from("C:/Program Files (x86)/Java/jdk1.6.0_27/include")
-                includes.from("C:/Program Files (x86)/Java/jdk1.6.0_27/include/win32")
+                includes.from("C:/Program Files (x86)/Java/jdk1.7.0_55/include")
+                includes.from("C:/Program Files (x86)/Java/jdk1.7.0_55/include/win32")
             }
             if (targetPlatform == platforms.x86)
-                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/kernel32.lib")
+                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/kernel32.lib")
             if (targetPlatform == platforms.x64)
-                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Lib/x64/kernel32.lib")
+                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/kernel32.lib")
         }
     }
     tasks.withType(CCompile) {
