@@ -2,11 +2,18 @@ apply plugin: 'c'
 
 binaries.all {
     if (toolChain in Gcc || toolChain in Clang) {
-        cCompiler.define "NDEBUG"
+        if (buildType == buildTypes.release) {
+          cCompiler.define "NDEBUG"
+        }
         cCompiler.define "_REENTRANT"
         cCompiler.define "LUA_USE_LINUX"
-        cCompiler.args "-O2", "-fno-strict-aliasing"
-        linker.args "-s"
+        if (buildType == buildTypes.debug) {
+          cCompiler.args "-g", "-fno-strict-aliasing"
+        }
+        else {
+          cCompiler.args "-O2", "-fno-strict-aliasing"
+          linker.args "-s"
+        }
         tasks.withType(LinkSharedLibrary) {
             tasks.withType(CCompile) {
                 includes.from("eris/src")
@@ -16,7 +23,7 @@ binaries.all {
         }
     }
     if (toolChain in VisualCpp) {
-        if (false) {
+        if (buildType == buildTypes.debug) {
             cCompiler.args "/Od", "/Zi", "/MTd"
             linker.args "/debug"
         }
@@ -59,7 +66,10 @@ libraries {
 }
 
 model {
-    buildTypes { release }
+    buildTypes {
+      debug
+      release
+    }
     platforms {
         x86 { architecture "x86" }
         x64 { architecture "x86_64" }
