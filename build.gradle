@@ -74,4 +74,10 @@ model {
         x86 { architecture "x86" }
         x64 { architecture "x86_64" }
     }
+    toolChains {
+        gcc(Gcc) {
+            linker.executable = 'gcc'
+        }
+        visualCpp(VisualCpp)
+    }
 }
