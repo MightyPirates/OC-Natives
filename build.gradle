@@ -19,6 +19,10 @@ binaries.all {
                 includes.from("eris/src")
                 includes.from("/usr/lib/jvm/java-6-openjdk/include")
                 includes.from("/usr/lib/jvm/java-6-openjdk/include/linux")
+                includes.from("/usr/local/openjdk7/include")
+                includes.from("/usr/local/openjdk7/include/freebsd")
+                includes.from("/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include")
+                includes.from("/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include/darwin")
             }
         }
     }
@@ -78,6 +82,7 @@ model {
         gcc(Gcc) {
             linker.executable = 'gcc'
         }
+        clang(Clang)
         visualCpp(VisualCpp)
     }
 }
