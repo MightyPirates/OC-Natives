@@ -19,6 +19,8 @@ binaries.all {
                 includes.from("eris/src")
                 includes.from("/usr/lib/jvm/java-6-openjdk/include")
                 includes.from("/usr/lib/jvm/java-6-openjdk/include/linux")
+                includes.from("/usr/lib/jvm/java-7-openjdk/include")
+                includes.from("/usr/lib/jvm/java-7-openjdk/include/linux")
                 includes.from("/usr/local/openjdk7/include")
                 includes.from("/usr/local/openjdk7/include/freebsd")
                 includes.from("/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include")
@@ -51,6 +53,10 @@ binaries.all {
     }
 }
 
+libraries {
+    natives { targetPlatforms "x86", "x64", "arm" }
+}
+
 sources {
     natives {
         c {
@@ -65,10 +71,6 @@ sources {
     }
 }
 
-libraries {
-    natives { targetPlatforms "x86", "x64" }
-}
-
 model {
     buildTypes {
       debug
@@ -77,10 +79,15 @@ model {
     platforms {
         x86 { architecture "x86" }
         x64 { architecture "x86_64" }
+        arm { architecture "arm" }
     }
     toolChains {
         gcc(Gcc) {
             linker.executable = 'gcc'
+            target('arm') {
+                linker.executable = 'arm-unknown-linux-gnueabi-gcc'
+                cCompiler.executable = 'arm-unknown-linux-gnueabi-gcc'
+            }
         }
         clang(Clang)
         visualCpp(VisualCpp)
