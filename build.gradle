@@ -21,6 +21,8 @@ binaries.all {
                 includes.from("/usr/lib/jvm/java-6-openjdk/include/linux")
                 includes.from("/usr/lib/jvm/java-7-openjdk/include")
                 includes.from("/usr/lib/jvm/java-7-openjdk/include/linux")
+                includes.from("/usr/lib/jvm/java-7-openjdk-amd64/include")
+                includes.from("/usr/lib/jvm/java-7-openjdk-amd64/include/linux")
                 includes.from("/usr/local/openjdk7/include")
                 includes.from("/usr/local/openjdk7/include/freebsd")
                 includes.from("/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home/include")
