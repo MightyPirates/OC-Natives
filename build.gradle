@@ -84,6 +84,7 @@ model {
         arm { architecture "arm" }
     }
     toolChains {
+        visualCpp(VisualCpp)
         gcc(Gcc) {
             linker.executable = 'gcc'
             target('arm') {
@@ -92,6 +93,5 @@ model {
             }
         }
         clang(Clang)
-        visualCpp(VisualCpp)
     }
 }
