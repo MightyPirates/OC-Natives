@@ -1,7 +1,8 @@
 [submodule "jnlua"]
 	path = jnlua
 	url = https://github.com/fnuecke/jnlua.git
-	branch = eris
+	branch = eris-Lua5.3
 [submodule "eris"]
 	path = eris
 	url = https://github.com/fnuecke/eris.git
+  branch = master-lua5.3
