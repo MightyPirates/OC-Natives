@@ -43,11 +43,24 @@ binaries.all {
                 includes.from("eris/src")
                 includes.from("C:/Program Files (x86)/Java/jdk1.7.0_55/include")
                 includes.from("C:/Program Files (x86)/Java/jdk1.7.0_55/include/win32")
+                includes.from("C:/Program Files/Java/jdk1.8.0_51/include")
+                includes.from("C:/Program Files/Java/jdk1.8.0_51/include/win32")
+                includes.from("C:/Program Files (x86)/Windows Kits/10/Include/10.0.10240.0/ucrt")
             }
             if (targetPlatform == platforms.x86)
-                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/kernel32.lib")
+                if (buildType == buildTypes.debug) {
+                    libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/kernel32.lib", "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.10240.0/ucrt/x86/libucrtd.lib")
+                }
+                else {
+                    libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/kernel32.lib", "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.10240.0/ucrt/x86/libucrt.lib")
+                }
             if (targetPlatform == platforms.x64)
-                libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/kernel32.lib")
+                if (buildType == buildTypes.debug) {
+                    libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/kernel32.lib", "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.10240.0/ucrt/x64/libucrtd.lib")
+                }
+                else {
+                    libs += files("C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/uuid.lib", "C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A/Lib/x64/kernel32.lib", "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.10240.0/ucrt/x64/libucrt.lib")
+                }
         }
     }
     tasks.withType(CCompile) {
